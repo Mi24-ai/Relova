@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reward - Relova</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* HEADER */
+.reward-hero {
+  background: linear-gradient(135deg,#1b4332,#2d6a4f);
+  color: white;
+  text-align: center;
+  padding: 60px 30px;
+}
+
+/* CARD */
+.reward-card {
+  max-width: 500px;
+  margin: -40px auto 30px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* POINT */
+.point {
+  font-size: 40px;
+  color: #2d6a4f;
+}
+
+/* PROGRESS */
+.progress-bar {
+  height: 12px;
+  background: #ddd;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+.progress {
+  height: 12px;
+  width: 0%;
+  background: linear-gradient(90deg,#2d6a4f,#52b788);
+}
+
+/* LEVEL */
+.level {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* REWARD LIST */
+.reward-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+.reward-item {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.reward-item:hover {
+  transform: translateY(-5px);
+}
+
+/* BUTTON */
+.btn {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background: #2d6a4f;
+  color: white;
+  cursor: pointer;
+}
+
+/* HISTORY */
+.history {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.history-item {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #2d6a4f;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.jpg">
+    <h2>Relova</h2>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Reward</a></li>
+    <li><a href="premium.html">Premium</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="reward-hero">
+  <h1>Reward & Poin 🎁</h1>
+  <p>Kumpulkan poin dan tukarkan jadi diskon</p>
+</section>
+
+<!-- POINT CARD -->
+<div class="reward-card">
+  <h2>Poin Kamu</h2>
+  <div class="point" id="point">0</div>
+
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <div class="level" id="level">Bronze</div>
+</div>
+
+<!-- REWARD -->
+<div class="reward-list">
+
+  <div class="reward-item">
+    <h3>Diskon 10%</h3>
+    <p>300 poin</p>
+    <button class="btn" onclick="redeem(100)">Tukar</button>
+  </div>
+
+  <div class="reward-item">
+    <h3>Diskon 25%</h3>
+    <p>500 poin</p>
+    <button class="btn" onclick="redeem(200)">Tukar</button>
+  </div>
+
+  <div class="reward-item">
+    <h3>Diskon 30%</h3>
+    <p>700 poin</p>
+    <button class="btn" onclick="redeem(400)">Tukar</button>
+  </div>
+
+</div>
+
+<!-- HISTORY -->
+<div class="history">
+  <h2>Riwayat Aktivitas</h2>
+
+  <div class="history-item">+50 poin dari Circular Drop</div>
+  <div class="history-item">+30 poin dari Donasi</div>
+  <div class="history-item">+20 poin dari Marketplace</div>
+</div>
+
+<div class="popup" id="popup"></div>
+
+<script>
+
+let points = localStorage.getItem("points") || 120;
+points = parseInt(points);
+
+const pointEl = document.getElementById("point");
+const progress = document.getElementById("progress");
+const level = document.getElementById("level");
+
+function updateUI(){
+  pointEl.innerText = points;
+
+  let lvl = "Bronze";
+  let prog = 30;
+
+  if(points >= 300){
+    lvl = "Gold";
+    prog = 100;
+  } else if(points >= 150){
+    lvl = "Silver";
+    prog = 60;
+  }
+
+  level.innerText = lvl;
+  progress.style.width = prog + "%";
+}
+
+updateUI();
+
+function redeem(cost){
+  if(points < cost){
+    showPopup("Poin tidak cukup ❌");
+    return;
+  }
+
+  points -= cost;
+  localStorage.setItem("points", points);
+
+  showPopup("Berhasil ditukar 🎉 Diskon aktif!");
+  updateUI();
+}
+
+function showPopup(text){
+  const popup = document.getElementById("popup");
+  popup.innerText = text;
+  popup.style.display = "block";
+
+  setTimeout(()=>{
+    popup.style.display = "none";
+  },2000);
+}
+
+</script>
+
+</body>
+</html>

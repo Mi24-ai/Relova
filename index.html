@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relova - Circular Fashion</title>
+
+  <!-- HUBUNGKAN CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.jpg">
+    <h2>Relova</h2>
+  </div>
+
+  <ul>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Reward</a></li>
+    <li><a href="premium.html">Premium</a></li>
+  </ul>
+
+  <button onclick="location.href='premium.html'">Mulai Gratis</button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Fashion <span>Berkelanjutan</span><br>Dimulai dari Lemarimu</h1>
+    <p>
+      Jual, donasi, daur ulang, dan coba pakaian secara virtual dalam satu platform inovatif.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary" onclick="location.href='marketplace.html'">Mulai Sekarang</button>
+      <button class="secondary">Pelajari</button>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    <img src="https://admincerdas.s3.ap-southeast-1.amazonaws.com/20220708/29.1.PNG">
+  </div>
+</section>
+
+<!-- ================= FITUR ================= -->
+<section class="section">
+  <h2>Satu Platform, Banyak Solusi</h2>
+
+  <div class="grid">
+
+    <div class="card" onclick="location.href='marketplace.html'">
+      <img src="https://admincerdas.s3.ap-southeast-1.amazonaws.com/20220708/29.1.PNG">
+      <div class="card-content">
+        <h3>Marketplace</h3>
+        <p>Jual & beli pakaian bekas berkualitas</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='kamipeduli.html'">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR73dRcLAkYIzG29xrJE8xsd5wcAiIh_gjGaw&s">
+      <div class="card-content">
+        <h3>Kami Peduli</h3>
+        <p>Donasikan pakaian untuk yang membutuhkan</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='circulardrop.html'">
+      <img src="https://imgx.parapuan.co/crop/30x16:1181x776/x/photo/2021/03/21/daur-ulang-pakaianjpg-20210321095550.jpg">
+      <div class="card-content">
+        <h3>Circular Drop</h3>
+        <p>Daur ulang pakaian jadi produk baru</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="location.href='tryon.html'">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNT6lRFX8HAPgRHJDgZDJ0hO6SYCgkfOg-OQ&s">
+      <div class="card-content">
+        <h3>Virtual Try-On</h3>
+        <p>Coba pakaian langsung di tubuhmu</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= REWARD SYSTEM ================= -->
+<section class="section">
+  <h2>Reward System 🎁</h2>
+
+  <div class="reward-box">
+    <h3>Poin Kamu</h3>
+    <h1 id="points">0</h1>
+    <p>Level: <span id="level">Bronze</span></p>
+
+    <div class="progress">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <p>Kumpulkan poin dari donasi & transaksi untuk dapat diskon!</p>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="impact">
+  <h2>Dampak Nyata Relova 🌱</h2>
+
+  <div class="impact-grid">
+
+    <div class="impact-box">
+      <h3>12.480+</h3>
+      <p>Pakaian digunakan kembali</p>
+    </div>
+
+    <div class="impact-box">
+      <h3>48 Ton</h3>
+      <p>Limbah tekstil berkurang</p>
+    </div>
+
+    <div class="impact-box">
+      <h3>3.250+</h3>
+      <p>Pakaian didonasikan</p>
+    </div>
+
+    <div class="impact-box">
+      <h3>30+</h3>
+      <p>Mitra sosial</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <h2>Mulai Perubahan Hari Ini 🚀</h2>
+  <p>Gabung dengan gerakan circular fashion bersama Relova</p>
+
+  <button onclick="location.href='premium.html'">
+    Coba Premium
+  </button>
+</section>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+
+/* REWARD SYSTEM */
+let points = localStorage.getItem("points") || 50;
+points = parseInt(points);
+
+document.getElementById("points").innerText = points;
+
+let level = "Bronze";
+let progress = 30;
+
+if(points >= 200){
+  level = "Gold";
+  progress = 100;
+}else if(points >= 100){
+  level = "Silver";
+  progress = 60;
+}
+
+document.getElementById("level").innerText = level;
+document.getElementById("progress").style.width = progress + "%";
+
+</script>
+
+</body>
+</html>

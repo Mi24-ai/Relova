@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium - Relova</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* HERO */
+.premium-hero {
+  text-align: center;
+  padding: 60px 30px;
+  background: linear-gradient(135deg,#1b4332,#2d6a4f);
+  color: white;
+}
+
+.premium-hero h1 {
+  font-size: 36px;
+}
+
+/* GRID */
+.price-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 50px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* PREMIUM CARD */
+.featured {
+  border: 3px solid #2d6a4f;
+  transform: scale(1.05);
+}
+
+/* PRICE */
+.price {
+  font-size: 30px;
+  color: #2d6a4f;
+  margin: 10px 0;
+}
+
+/* LIST */
+.features {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.features li {
+  margin: 8px 0;
+}
+
+/* BUTTON */
+.btn {
+  margin-top: 20px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 25px;
+  border: none;
+  background: #2d6a4f;
+  color: white;
+  cursor: pointer;
+}
+
+/* IMPACT */
+.benefit {
+  text-align: center;
+  padding: 50px;
+}
+
+.benefit-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.benefit-box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #2d6a4f;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.jpg">
+    <h2>Relova</h2>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Reward</a></li>
+    <li><a href="premium.html">Premium</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="premium-hero">
+  <h1>Upgrade ke Premium ✨</h1>
+  <p>Dapatkan pengalaman fashion digital terbaik</p>
+</section>
+
+<!-- PRICING -->
+<div class="price-grid">
+
+  <!-- FREE -->
+  <div class="card">
+    <h3>Free</h3>
+    <p class="price">Rp 0</p>
+
+    <ul class="features">
+      <li>✔ Marketplace</li>
+      <li>✔ Donasi</li>
+      <li>✔ Circular Drop</li>
+      <li>✖ Virtual Try-On</li>
+    </ul>
+
+    <button class="btn">Mulai</button>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="card featured">
+    <h3>Premium ⭐</h3>
+    <p class="price">Rp 59.000 / bulan</p>
+
+    <ul class="features">
+      <li>✔ Semua fitur Free</li>
+      <li>✔ Virtual Try-On AI</li>
+      <li>✔ Prioritas listing marketplace</li>
+      <li>✔ Bonus reward poin</li>
+    </ul>
+
+    <button class="btn" onclick="upgrade()">Upgrade Sekarang</button>
+  </div>
+
+</div>
+
+<!-- BENEFIT -->
+<section class="benefit">
+  <h2>Kenapa Premium?</h2>
+
+  <div class="benefit-grid">
+    <div class="benefit-box">👗 Try-On AI</div>
+    <div class="benefit-box">🚀 Lebih Cepat Laku</div>
+    <div class="benefit-box">🎁 Bonus Reward</div>
+    <div class="benefit-box">⭐ Experience Eksklusif</div>
+  </div>
+</section>
+
+<div class="popup" id="popup">Berhasil upgrade ke Premium 🎉</div>
+
+<script>
+function upgrade(){
+  localStorage.setItem("premium", true);
+
+  const popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  setTimeout(()=> popup.style.display="none", 3000);
+}
+</script>
+
+</body>
+</html>

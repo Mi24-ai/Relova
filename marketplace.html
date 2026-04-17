@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace - Relova</title>
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+body{
+  background:#f5f7f6;
+  color:#1b4332;
+}
+
+/* NAVBAR */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:38px;
+  border-radius:8px;
+}
+
+nav ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+nav a{
+  text-decoration:none;
+  color:#1b4332;
+  font-weight:500;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#2d6a4f;
+}
+
+/* SEARCH */
+.search-box{
+  padding:20px 40px;
+}
+
+.search-box input{
+  width:100%;
+  padding:14px;
+  border-radius:30px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
+
+/* CATEGORY */
+.category-scroll{
+  display:flex;
+  gap:10px;
+  padding:10px 40px;
+  overflow-x:auto;
+}
+
+.category{
+  padding:8px 18px;
+  background:white;
+  border-radius:20px;
+  cursor:pointer;
+  border:1px solid #ddd;
+  transition:0.3s;
+}
+
+.category:hover{
+  background:#e9f5ee;
+}
+
+.category.active{
+  background:#2d6a4f;
+  color:white;
+}
+
+/* PRODUCTS */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+  padding:30px 40px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.07);
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#2d6a4f;
+  color:white;
+  font-size:12px;
+  padding:5px 10px;
+  border-radius:20px;
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:15px;
+}
+
+.card-body h4{
+  font-size:16px;
+}
+
+.price{
+  color:#2d6a4f;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* ACTION */
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  font-size:18px;
+}
+
+.actions span{
+  cursor:pointer;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  display:none;
+  width:320px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+.popup img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:10px;
+}
+
+.popup button{
+  margin-top:10px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:20px;
+  background:#2d6a4f;
+  color:white;
+  cursor:pointer;
+}
+
+.close{
+  float:right;
+  cursor:pointer;
+}
+
+/* CART FLOAT */
+.cart{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#2d6a4f;
+  color:white;
+  padding:12px 18px;
+  border-radius:25px;
+  font-weight:bold;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.jpg">
+    <h2>Relova</h2>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Reward</a></li>
+    <li><a href="premium.html">Premium</a></li>
+  </ul>
+</nav>
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input type="text" id="search" placeholder="Cari outfit impianmu...">
+</div>
+
+<!-- CATEGORY -->
+<div class="category-scroll">
+  <div class="category active" onclick="filterCategory('all',event)">All</div>
+  <div class="category" onclick="filterCategory('dress',event)">Dress</div>
+  <div class="category" onclick="filterCategory('jacket',event)">Jacket</div>
+  <div class="category" onclick="filterCategory('pants',event)">Pants</div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="product-grid" id="products"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <span class="close" onclick="closePopup()">✖</span>
+  <img id="popupImg">
+  <h3 id="popupName"></h3>
+  <p id="popupPrice"></p>
+  <button onclick="addCart()">Tambah ke Keranjang</button>
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">🛒 0</div>
+
+<script>
+
+let cart = 0;
+
+const data = [
+{ name:"Floral Dress", price:"Rp 120.000", category:"dress", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d" },
+{ name:"Vintage Dress", price:"Rp 90.000", category:"dress", img:"https://images.unsplash.com/photo-1520975916090-3105956dac38" },
+{ name:"Denim Jacket", price:"Rp 150.000", category:"jacket", img:"https://images.unsplash.com/photo-1544022613-e87ca75a784a" },
+{ name:"Leather Jacket", price:"Rp 200.000", category:"jacket", img:"https://images.unsplash.com/photo-1551028719-00167b16eac5" },
+{ name:"Short Pants", price:"Rp 80.000", category:"pants", img:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1" },
+{ name:"Jeans Pants", price:"Rp 110.000", category:"pants", img:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246" }
+];
+
+let filtered = data;
+
+function render(){
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  filtered.forEach(item=>{
+    container.innerHTML += `
+      <div class="card" onclick="showDetail('${item.name}','${item.price}','${item.img}')">
+        <div class="badge">Best</div>
+        <img src="${item.img}">
+        <div class="card-body">
+          <h4>${item.name}</h4>
+          <p class="price">${item.price}</p>
+          <div class="actions">
+            <span onclick="event.stopPropagation(); addCart()">🛒</span>
+            <span onclick="event.stopPropagation(); toggleFav(this)">🤍</span>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function showDetail(name,price,img){
+  document.getElementById("popup").style.display="block";
+  document.getElementById("popupName").innerText=name;
+  document.getElementById("popupPrice").innerText=price;
+  document.getElementById("popupImg").src=img;
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+function addCart(){
+  cart++;
+  document.getElementById("cart").innerText="🛒 "+cart;
+}
+
+function toggleFav(el){
+  el.innerText = el.innerText==="🤍" ? "❤️" : "🤍";
+}
+
+function filterCategory(cat,e){
+  document.querySelectorAll(".category").forEach(c=>c.classList.remove("active"));
+  e.target.classList.add("active");
+
+  if(cat==="all") filtered=data;
+  else filtered=data.filter(d=>d.category===cat);
+
+  render();
+}
+
+document.getElementById("search").addEventListener("input", function(){
+  const val=this.value.toLowerCase();
+  filtered=data.filter(d=>d.name.toLowerCase().includes(val));
+  render();
+});
+
+render();
+
+</script>
+
+</body>
+</html>

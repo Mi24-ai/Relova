@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circular Drop - Relova</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* HERO */
+.circular-hero {
+  padding: 60px 40px;
+  text-align: center;
+  background: linear-gradient(135deg,#e9f5ee,#f5f7f6);
+}
+
+.circular-hero h1 {
+  font-size: 40px;
+}
+
+.circular-hero span {
+  color: #2d6a4f;
+}
+
+.circular-hero img {
+  width: 280px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+/* STEP FLOW */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+  padding: 50px 40px;
+}
+
+.step {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+/* FORM */
+.form-box {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.form-box input,
+.form-box select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* IMPACT */
+.impact-circular {
+  background: #1b4332;
+  color: white;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.impact-grid {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.impact-box {
+  background: #2d6a4f;
+  padding: 20px;
+  border-radius: 15px;
+  flex: 1;
+}
+
+/* BUTTON */
+.btn {
+  margin-top: 20px;
+  padding: 15px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #2d6a4f;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .impact-grid {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.jpg">
+    <h2>Relova</h2>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="kamipeduli.html">Kami Peduli</a></li>
+    <li><a href="circulardrop.html">Circular Drop</a></li>
+    <li><a href="reward.html">Reward</a></li>
+    <li><a href="premium.html">Premium</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="circular-hero">
+  <h1>Circular <span>Drop</span> ♻️</h1>
+  <p>Daur ulang pakaian lama menjadi produk baru yang bernilai</p>
+
+  <img src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807">
+</section>
+
+<!-- STEP FLOW -->
+<section class="steps">
+
+  <div class="step">
+    <h3>1. Upload Data</h3>
+    <p>Isi data pakaian yang ingin didaur ulang</p>
+  </div>
+
+  <div class="step">
+    <h3>2. Kirim Pakaian</h3>
+    <p>Kirim ke mitra Relova</p>
+  </div>
+
+  <div class="step">
+    <h3>3. Proses Daur Ulang</h3>
+    <p>Pakaian diolah jadi produk baru</p>
+  </div>
+
+  <div class="step">
+    <h3>4. Dapat Reward</h3>
+    <p>Dapat poin & diskon belanja</p>
+  </div>
+
+</section>
+
+<!-- FORM -->
+<section class="section">
+  <h2>Kirim Pakaian Kamu</h2>
+
+  <div class="form-box">
+
+    <input type="text" placeholder="Nama">
+    <input type="text" placeholder="Alamat">
+
+    <select>
+      <option>Jenis Pakaian</option>
+      <option>Kaos</option>
+      <option>Jaket</option>
+      <option>Celana</option>
+    </select>
+
+    <input type="number" placeholder="Jumlah Pakaian">
+
+    <button class="btn" onclick="kirim()">Kirim Sekarang</button>
+
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-circular">
+  <h2>Dampak Circular Drop 🌱</h2>
+
+  <div class="impact-grid">
+    <div class="impact-box">
+      <h3>5.200+</h3>
+      <p>Pakaian didaur ulang</p>
+    </div>
+
+    <div class="impact-box">
+      <h3>20 Ton</h3>
+      <p>Limbah tekstil berkurang</p>
+    </div>
+
+    <div class="impact-box">
+      <h3>1.800+</h3>
+      <p>Produk baru dihasilkan</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function kirim(){
+  alert("Pakaian berhasil dikirim! 🎉 Kamu mendapatkan +50 poin");
+}
+</script>
+
+</body>
+</html>
