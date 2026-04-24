@@ -3,203 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium - Relova</title>
-
-<link rel="stylesheet" href="style.css">
-
+<title>Premium — Relova</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{--gd:#1a3c2e;--gm:#2d6a4f;--gl:#40916c;--gp:#d8f3dc;--gg:#f0faf3;--cr:#faf8f3;--ww:#f7f5ef;--td:#1a1a1a;--tm:#4a4a4a;--tl:#8a8a8a;--ac:#e8c547;--aw:#f4a261;--bd:rgba(45,106,79,.12);--sm:0 2px 12px rgba(0,0,0,.06);--md:0 8px 30px rgba(0,0,0,.10);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--td);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(250,248,243,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);transition:all .3s;}
+nav.scrolled{box-shadow:var(--sm);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo img{width:36px;height:36px;border-radius:10px;object-fit:cover;}
+.logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gd);}
+nav ul{display:flex;list-style:none;gap:4px;}
+nav ul li a{text-decoration:none;color:var(--tm);font-size:14px;font-weight:500;padding:8px 13px;border-radius:8px;transition:all .2s;}
+nav ul li a:hover,nav ul li a.active{color:var(--gm);background:var(--gp);}
+.nav-cta{background:var(--gm)!important;color:white!important;border-radius:10px!important;font-weight:600!important;}
 
 /* HERO */
-.premium-hero {
-  text-align: center;
-  padding: 60px 30px;
-  background: linear-gradient(135deg,#1b4332,#2d6a4f);
-  color: white;
-}
+.hero-prem{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px 60px;background:linear-gradient(160deg,var(--gd) 0%,#2d6a4f 60%,#40916c 100%);position:relative;overflow:hidden;}
+.hero-prem::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(232,197,71,.12) 0%,transparent 60%);}
+.hero-prem::after{content:'✨';position:absolute;font-size:220px;opacity:.03;top:-20px;right:-20px;pointer-events:none;}
+.h-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:white;font-size:13px;font-weight:600;padding:6px 16px;border-radius:20px;margin-bottom:22px;border:1px solid rgba(255,255,255,.2);}
+.hero-prem h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,64px);font-weight:900;color:white;line-height:1.05;margin-bottom:18px;}
+.hero-prem h1 em{color:var(--ac);font-style:normal;}
+.hero-prem p{color:rgba(255,255,255,.75);font-size:17px;max-width:500px;margin:0 auto 36px;line-height:1.7;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-gold{background:var(--ac);color:var(--gd);border:none;padding:15px 32px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 24px rgba(232,197,71,.4);}
+.btn-gold:hover{background:#f0cd40;transform:translateY(-2px);box-shadow:0 10px 32px rgba(232,197,71,.5);}
+.btn-ghost{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.4);padding:14px 28px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-ghost:hover{background:rgba(255,255,255,.1);}
 
-.premium-hero h1 {
-  font-size: 36px;
-}
+/* STATS STRIP */
+.stats-strip{background:white;padding:32px 48px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;border-bottom:1px solid var(--bd);}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--gm);}
+.stat-lbl{font-size:13px;color:var(--tl);margin-top:4px;}
 
-/* GRID */
-.price-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin: 50px;
-  flex-wrap: wrap;
-}
+/* PRICING */
+.pricing-sec{padding:80px 48px;background:var(--ww);}
+.sec-header{text-align:center;margin-bottom:48px;}
+.sec-label{display:inline-block;background:var(--gp);color:var(--gm);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--gd);line-height:1.2;}
+.pricing-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:820px;margin:0 auto;}
 
-/* CARD */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  width: 300px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: 0.3s;
-}
+.price-card{background:white;border-radius:24px;padding:36px 30px;width:360px;border:1.5px solid var(--bd);transition:all .3s;position:relative;}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--md);}
+.price-card.featured{border:2.5px solid var(--gm);background:white;}
+.feat-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gm);color:white;font-size:12px;font-weight:600;padding:5px 18px;border-radius:20px;white-space:nowrap;}
+.plan-icon{font-size:36px;margin-bottom:14px;}
+.plan-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gd);margin-bottom:4px;}
+.plan-sub{font-size:13px;color:var(--tl);margin-bottom:20px;}
+.plan-price{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--gm);line-height:1;}
+.plan-period{font-size:13px;color:var(--tl);margin-bottom:26px;margin-top:4px;}
+.feat-list{list-style:none;margin-bottom:28px;}
+.feat-list li{padding:9px 0;font-size:14px;color:var(--tm);border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start;}
+.feat-list li:last-child{border:none;}
+.fc{color:var(--gm);font-weight:600;flex-shrink:0;}
+.fx{color:#ccc;flex-shrink:0;}
+.btn-plan{width:100%;padding:14px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;border:none;}
+.btn-plan.free-btn{background:transparent;color:var(--gm);border:1.5px solid var(--gm);}
+.btn-plan.free-btn:hover{background:var(--gp);}
+.btn-plan.prem-btn{background:linear-gradient(135deg,var(--gm),var(--gd));color:white;box-shadow:0 4px 20px rgba(45,106,79,.3);}
+.btn-plan.prem-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,106,79,.4);}
 
-.card:hover {
-  transform: translateY(-10px);
-}
+/* BENEFIT */
+.benefit-sec{padding:80px 48px;background:var(--cr);}
+.benefit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;margin:0 auto;}
+.benefit-card{background:white;border-radius:20px;padding:28px;border:1.5px solid var(--bd);transition:all .3s;}
+.benefit-card:hover{transform:translateY(-4px);box-shadow:var(--sm);}
+.benefit-icon{font-size:34px;margin-bottom:12px;}
+.benefit-card h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--gd);margin-bottom:6px;}
+.benefit-card p{font-size:13px;color:var(--tm);line-height:1.6;}
 
-/* PREMIUM CARD */
-.featured {
-  border: 3px solid #2d6a4f;
-  transform: scale(1.05);
-}
+/* TESTIMONIAL */
+.testi-sec{padding:70px 48px;background:var(--gd);color:white;text-align:center;}
+.testi-grid{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:36px;}
+.testi-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px;max-width:280px;text-align:left;}
+.testi-stars{font-size:14px;margin-bottom:10px;color:var(--ac);}
+.testi-text{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.65;margin-bottom:14px;}
+.testi-name{font-size:13px;font-weight:600;color:white;}
+.testi-sub{font-size:12px;color:rgba(255,255,255,.5);}
 
-/* PRICE */
-.price {
-  font-size: 30px;
-  color: #2d6a4f;
-  margin: 10px 0;
-}
+/* CTA */
+.cta-sec{padding:80px 48px;background:var(--gp);text-align:center;}
+.cta-sec h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,44px);color:var(--gd);margin-bottom:14px;}
+.cta-sec p{color:var(--tm);font-size:15px;max-width:460px;margin:0 auto 32px;line-height:1.65;}
 
-/* LIST */
-.features {
-  text-align: left;
-  margin-top: 15px;
-}
+/* SUCCESS */
+.sov{position:fixed;inset:0;background:rgba(26,60,46,.9);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sov.show{opacity:1;pointer-events:all;}
+.sb{background:var(--cr);border-radius:28px;padding:42px;text-align:center;max-width:420px;width:100%;transform:scale(.92) translateY(14px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
+.sov.show .sb{transform:scale(1) translateY(0);}
+.sb h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--gd);margin-bottom:8px;}
+.sb p{color:var(--tm);font-size:14px;line-height:1.65;margin-bottom:22px;}
+.prem-badge-big{background:linear-gradient(135deg,var(--gm),var(--gd));color:white;border-radius:16px;padding:16px;margin-bottom:22px;}
+.prem-badge-big h3{font-family:'Playfair Display',serif;font-size:20px;}
+.prem-badge-big p{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:0;}
+.btn-ok{width:100%;padding:13px;background:var(--gm);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;}
+.btn-ok:hover{background:var(--gd);}
+.btn-sec{width:100%;padding:12px;background:transparent;color:var(--gm);border:1.5px solid var(--gm);border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;}
+.btn-sec:hover{background:var(--gp);}
 
-.features li {
-  margin: 8px 0;
-}
-
-/* BUTTON */
-.btn {
-  margin-top: 20px;
-  padding: 14px;
-  width: 100%;
-  border-radius: 25px;
-  border: none;
-  background: #2d6a4f;
-  color: white;
-  cursor: pointer;
-}
-
-/* IMPACT */
-.benefit {
-  text-align: center;
-  padding: 50px;
-}
-
-.benefit-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.benefit-box {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 220px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-}
-
-/* POPUP */
-.popup {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #2d6a4f;
-  color: white;
-  padding: 15px 20px;
-  border-radius: 10px;
-  display: none;
-}
-
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+footer{background:var(--gd);color:rgba(255,255,255,.5);text-align:center;padding:26px;font-size:13px;}
+footer span{color:rgba(255,255,255,.85);}
+@media(max-width:900px){nav{padding:12px 20px;}nav ul{display:none;}.hero-prem,.pricing-sec,.benefit-sec,.testi-sec,.cta-sec{padding-left:22px;padding-right:22px;}.stats-strip{gap:30px;}.pricing-grid{flex-direction:column;align-items:center;}}
 </style>
 </head>
-
 <body>
-
-<!-- NAVBAR -->
-<nav>
-  <div class="logo">
-    <img src="images/logo.jpg">
-    <h2>Relova</h2>
-  </div>
-
+<nav id="navbar">
+  <div class="logo"><img src="C:\Users\Advan\OneDrive\Documents\Desktop\VCS\RELOVA\images\logo.jpg" alt="Relova"><span class="logo-text">Relova</span></div>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="marketplace.html">Marketplace</a></li>
     <li><a href="tryon.html">Try-On</a></li>
     <li><a href="kamipeduli.html">Kami Peduli</a></li>
     <li><a href="circulardrop.html">Circular Drop</a></li>
-    <li><a href="reward.html">Reward</a></li>
-    <li><a href="premium.html">Premium</a></li>
+    <li><a href="reward.html">Relove Points</a></li>
+    <li><a href="premium.html" class="nav-cta active">Premium</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="premium-hero">
-  <h1>Upgrade ke Premium ✨</h1>
-  <p>Dapatkan pengalaman fashion digital terbaik</p>
+<section class="hero-prem">
+  <div>
+    <div class="h-chip">✨ Relova Premium</div>
+    <h1>Fashion Digital<br>Tanpa <em>Kompromi</em></h1>
+    <p>Unlock Virtual Try-On AI, bonus 2× Relove Points, prioritas listing, dan pengalaman circular fashion terbaik hanya untuk kamu.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="upgrade()">Upgrade Sekarang — Rp59.000/bln</button>
+      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Lihat Paket ↓</button>
+    </div>
+  </div>
 </section>
 
-<!-- PRICING -->
-<div class="price-grid">
-
-  <!-- FREE -->
-  <div class="card">
-    <h3>Free</h3>
-    <p class="price">Rp 0</p>
-
-    <ul class="features">
-      <li>✔ Marketplace</li>
-      <li>✔ Donasi</li>
-      <li>✔ Circular Drop</li>
-      <li>✖ Virtual Try-On</li>
-    </ul>
-
-    <button class="btn">Mulai</button>
-  </div>
-
-  <!-- PREMIUM -->
-  <div class="card featured">
-    <h3>Premium ⭐</h3>
-    <p class="price">Rp 59.000 / bulan</p>
-
-    <ul class="features">
-      <li>✔ Semua fitur Free</li>
-      <li>✔ Virtual Try-On AI</li>
-      <li>✔ Prioritas listing marketplace</li>
-      <li>✔ Bonus reward poin</li>
-    </ul>
-
-    <button class="btn" onclick="upgrade()">Upgrade Sekarang</button>
-  </div>
-
+<div class="stats-strip">
+  <div class="stat-item fade-up"><div class="stat-num">3.200+</div><div class="stat-lbl">Member Premium aktif</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.06s"><div class="stat-num">4,8★</div><div class="stat-lbl">Rating kepuasan</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.12s"><div class="stat-num">2×</div><div class="stat-lbl">EcoPoints lebih banyak</div></div>
+  <div class="stat-item fade-up" style="transition-delay:.18s"><div class="stat-num">AI</div><div class="stat-lbl">Virtual Try-On Eksklusif</div></div>
 </div>
 
-<!-- BENEFIT -->
-<section class="benefit">
-  <h2>Kenapa Premium?</h2>
+<section class="pricing-sec" id="pricing">
+  <div class="sec-header fade-up">
+    <div class="sec-label">Pilihan Paket</div>
+    <h2 class="sec-title">Mulai Gratis, Upgrade Kapan Saja</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card fade-up">
+      <div class="plan-icon">🌿</div>
+      <div class="plan-name">Free</div>
+      <div class="plan-sub">Untuk memulai perjalananmu</div>
+      <div class="plan-price">Rp 0</div>
+      <div class="plan-period">Selamanya gratis</div>
+      <ul class="feat-list">
+        <li><span class="fc">✓</span> Resale Marketplace</li>
+        <li><span class="fc">✓</span> Kami Peduli (Donasi)</li>
+        <li><span class="fc">✓</span> Circular Drop</li>
+        <li><span class="fc">✓</span> Relove Points System</li>
+        <li><span class="fc">✓</span> Relova Pick-Up</li>
+        <li><span class="fx">✕</span> Virtual Try-On AI</li>
+        <li><span class="fx">✕</span> Prioritas listing</li>
+        <li><span class="fx">✕</span> 2× Bonus EcoPoints</li>
+        <li><span class="fx">✕</span> Diskon ongkir Pick-Up</li>
+      </ul>
+      <button class="btn-plan free-btn" onclick="location.href='marketplace.html'">Mulai Gratis</button>
+    </div>
 
-  <div class="benefit-grid">
-    <div class="benefit-box">👗 Try-On AI</div>
-    <div class="benefit-box">🚀 Lebih Cepat Laku</div>
-    <div class="benefit-box">🎁 Bonus Reward</div>
-    <div class="benefit-box">⭐ Experience Eksklusif</div>
+    <div class="price-card featured fade-up" style="transition-delay:.08s">
+      <div class="feat-badge">⭐ Paling Populer</div>
+      <div class="plan-icon">💎</div>
+      <div class="plan-name">Premium</div>
+      <div class="plan-sub">Untuk pengalaman terbaik</div>
+      <div class="plan-price">Rp59.000</div>
+      <div class="plan-period">per bulan · batalkan kapan saja</div>
+      <ul class="feat-list">
+        <li><span class="fc">✓</span> Semua fitur Free</li>
+        <li><span class="fc">✓</span> <strong>Virtual Try-On AI</strong> (Eksklusif)</li>
+        <li><span class="fc">✓</span> Prioritas listing marketplace</li>
+        <li><span class="fc">✓</span> <strong>2× Relove Points</strong> setiap aktivitas</li>
+        <li><span class="fc">✓</span> Diskon ongkir Relova Pick-Up</li>
+        <li><span class="fc">✓</span> Badge Premium di profil</li>
+        <li><span class="fc">✓</span> Akses awal fitur baru</li>
+        <li><span class="fc">✓</span> Dukungan prioritas</li>
+      </ul>
+      <button class="btn-plan prem-btn" onclick="upgrade()">Upgrade Sekarang</button>
+    </div>
   </div>
 </section>
 
-<div class="popup" id="popup">Berhasil upgrade ke Premium 🎉</div>
+<section class="benefit-sec">
+  <div class="sec-header fade-up">
+    <div class="sec-label">Keunggulan Premium</div>
+    <h2 class="sec-title">Kenapa Pilih Premium?</h2>
+  </div>
+  <div class="benefit-grid">
+    <div class="benefit-card fade-up">
+      <div class="benefit-icon">🤖</div>
+      <h3>Virtual Try-On AI</h3>
+      <p>Coba pakaian secara virtual dengan teknologi image processing AI. Tidak ada lagi keraguan soal ukuran dan tampilan sebelum membeli.</p>
+    </div>
+    <div class="benefit-card fade-up" style="transition-delay:.05s">
+      <div class="benefit-icon">🚀</div>
+      <h3>Prioritas Listing</h3>
+      <p>Produkmu tampil di posisi teratas halaman marketplace, meningkatkan peluang terjual hingga 3× lebih cepat.</p>
+    </div>
+    <div class="benefit-card fade-up" style="transition-delay:.1s">
+      <div class="benefit-icon">🎁</div>
+      <h3>2× Relove Points</h3>
+      <p>Setiap donasi, daur ulang, dan transaksi menghasilkan poin dua kali lipat. Voucher diskon lebih cepat kamu raih.</p>
+    </div>
+    <div class="benefit-card fade-up" style="transition-delay:.15s">
+      <div class="benefit-icon">🛵</div>
+      <h3>Diskon Pick-Up</h3>
+      <p>Subsidi ongkos penjemputan Relova Pick-Up lebih besar untuk setiap donasi dan circular drop yang kamu lakukan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testi-sec">
+  <div class="sec-label" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)">Kata Mereka</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;margin-top:10px">Member Premium Relova Berbicara</h2>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Virtual Try-On beneran game changer! Aku bisa coba pakaian sebelum beli tanpa khawatir salah ukuran."</p>
+      <div class="testi-name">Muhammad illafi.</div><div class="testi-sub">Mahasiswa UNS Solo</div>
+    </div>
+    <div class="testi-card fade-up" style="transition-delay:.06s">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Dengan 2× poin premium, aku lebih cepat kumpulin voucher diskon. Worth banget bayar Rp59rb sebulan!"</p>
+      <div class="testi-name">April</div><div class="testi-sub">Thrift Seller Solo</div>
+    </div>
+    <div class="testi-card fade-up" style="transition-delay:.12s">
+      <div class="testi-stars">★★★★☆</div>
+      <p class="testi-text">"Prioritas listing bikin produkku sold lebih cepat. Return investasi premium terasa banget dari bulan pertama."</p>
+      <div class="testi-name">Marzuki </div><div class="testi-sub">Fashion Reseller</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <div class="sec-label">Bergabung Sekarang</div>
+  <h2>Siap Upgrade<br>Pengalamanmu?</h2>
+  <p>Bergabung dengan 3.200+ member Premium Relova dan nikmati fitur eksklusif circular fashion terbaik.</p>
+  <button class="btn-gold" onclick="upgrade()" style="font-size:15px;padding:16px 36px">Upgrade ke Premium — Rp59.000/bln</button>
+</section>
+
+<div class="sov" id="sOv">
+  <div class="sb">
+    <div style="font-size:52px;margin-bottom:14px">⭐</div>
+    <h2>Selamat Datang, Premium!</h2>
+    <div class="prem-badge-big"><h3>💎 Relova Premium</h3><p>Akun kamu sudah aktif Premium</p></div>
+    <p>Semua fitur eksklusif kini terbuka untukmu. Mulai dengan Virtual Try-On AI!</p>
+    <button class="btn-ok" onclick="location.href='tryon.html'">Coba Try-On Sekarang →</button>
+    <button class="btn-sec" onclick="closeSuccess()">Nanti Saja</button>
+  </div>
+</div>
+
+<footer><p>© 2026 <span>Relova</span> — Circular Fashion Platform · Solo, Indonesia</p></footer>
 
 <script>
-function upgrade(){
-  localStorage.setItem("premium", true);
-
-  const popup = document.getElementById("popup");
-  popup.style.display = "block";
-
-  setTimeout(()=> popup.style.display="none", 3000);
-}
+function upgrade(){localStorage.setItem('premium','true');document.getElementById('sOv').classList.add('show');document.body.style.overflow='hidden';}
+function closeSuccess(){document.getElementById('sOv').classList.remove('show');document.body.style.overflow='';}
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>30));
+const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
-
 </body>
 </html>
