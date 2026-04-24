@@ -3,172 +3,1284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relova - Circular Fashion</title>
+  <title>Relova — Circular Fashion Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-deep: #1a3c2e;
+      --green-mid: #2d6a4f;
+      --green-light: #40916c;
+      --green-pale: #d8f3dc;
+      --cream: #faf8f3;
+      --warm-white: #f7f5ef;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --text-light: #8a8a8a;
+      --accent: #e8c547;
+      --accent-warm: #f4a261;
+    }
 
-  <!-- HUBUNGKAN CSS -->
-  <link rel="stylesheet" href="style.css">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ====== NAVBAR ====== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(250, 248, 243, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+      transition: all 0.3s;
+    }
+
+    nav.scrolled {
+      padding: 12px 48px;
+      background: rgba(250, 248, 243, 0.98);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 10px rgba(45,106,79,0.25);
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--green-mid);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: white;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 4px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: var(--green-mid);
+      background: var(--green-pale);
+    }
+
+    .nav-cta {
+      background: var(--green-mid);
+      color: white !important;
+      padding: 10px 20px !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      transition: all 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--green-deep) !important;
+      color: white !important;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 48px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(64,145,108,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(232,197,71,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-eyebrow span {
+      width: 6px; height: 6px;
+      background: var(--green-mid);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 4.5vw, 60px);
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--green-deep);
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 .highlight {
+      color: var(--green-light);
+      position: relative;
+    }
+
+    .hero-text h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-text p {
+      font-size: 17px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--green-mid);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(45,106,79,0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(45,106,79,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green-mid);
+      border: 1.5px solid var(--green-mid);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--green-pale);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary svg {
+      transition: transform 0.3s;
+    }
+
+    .btn-secondary:hover svg {
+      transform: rotate(90deg);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(45,106,79,0.15);
+    }
+
+    .stat-item {}
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-card-stack {
+      position: relative;
+      width: 380px;
+      height: 480px;
+    }
+
+    .visual-card {
+      position: absolute;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .visual-card-main {
+      width: 280px;
+      height: 360px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--green-pale);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .visual-card-main .card-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    .visual-card-main h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--green-deep);
+    }
+
+    .visual-card-main p {
+      font-size: 13px;
+      color: var(--green-mid);
+      margin-top: 6px;
+    }
+
+    .visual-card-back1 {
+      width: 240px;
+      height: 320px;
+      top: 30px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+      z-index: 1;
+      transform: rotate(8deg);
+    }
+
+    .visual-card-back2 {
+      width: 240px;
+      height: 320px;
+      bottom: 30px;
+      left: 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+      z-index: 1;
+      transform: rotate(-6deg);
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: white;
+      border-radius: 14px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 4;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .badge-top {
+      top: 10px; right: 0;
+      color: var(--green-mid);
+      animation-delay: 0s;
+    }
+
+    .badge-bottom {
+      bottom: 20px; left: 0;
+      color: var(--accent-warm);
+      animation-delay: 1.5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ====== PELAJARI SECTION (modal) ====== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 60, 46, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--cream);
+      border-radius: 28px;
+      padding: 48px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      transform: translateY(30px) scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--green-pale);
+      border: none;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--green-deep);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(45,106,79,0.2); }
+
+    .modal-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--green-deep);
+      margin-bottom: 8px;
+    }
+
+    .modal-box .modal-sub {
+      color: var(--text-light);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .modal-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid rgba(45,106,79,0.1);
+    }
+
+    .step-num {
+      width: 40px; height: 40px;
+      min-width: 40px;
+      background: var(--green-mid);
+      color: white;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .modal-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .pillar-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(45,106,79,0.1);
+      text-align: center;
+    }
+
+    .pillar-icon { font-size: 28px; margin-bottom: 8px; }
+    .pillar-card h4 { font-size: 14px; font-weight: 600; color: var(--green-deep); }
+    .pillar-card p { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+    .modal-cta {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ====== SECTION WRAPPER ====== */
+    section.section-block {
+      padding: 80px 48px;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      color: var(--text-mid);
+      font-size: 16px;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    /* ====== FITUR GRID ====== */
+    .features-section {
+      background: white;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .features-header .section-sub {
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+      border: 1.5px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-img-wrap {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .feature-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .feature-card:hover .feature-img-wrap img {
+      transform: scale(1.07);
+    }
+
+    .feature-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(26,60,46,0.55) 100%);
+      border-radius: 18px 18px 0 0;
+    }
+
+    .feature-card-body {
+      padding: 22px 28px 28px;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--green-pale), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(45,106,79,0.25);
+      box-shadow: 0 20px 50px rgba(45,106,79,0.12);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      font-size: 34px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: var(--green-pale);
+      border-radius: 14px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .feature-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green-mid);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 14px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover .feature-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ====== REWARD SECTION ====== */
+    .reward-section {
+      background: var(--warm-white);
+    }
+
+    .reward-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .reward-card {
+      background: var(--green-deep);
+      border-radius: 28px;
+      padding: 40px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reward-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .reward-card .label {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .reward-points {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .reward-level {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+
+    .reward-progress-track {
+      background: rgba(255,255,255,0.1);
+      height: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .reward-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      border-radius: 8px;
+      transition: width 1s ease;
+    }
+
+    .reward-next {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .reward-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .reward-action-item {
+      background: rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .reward-action-item strong {
+      display: block;
+      font-size: 15px;
+      color: white;
+      margin-bottom: 2px;
+    }
+
+    /* ====== IMPACT ====== */
+    .impact-section {
+      background: var(--green-deep);
+      color: white;
+    }
+
+    .impact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .impact-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .impact-left p {
+      color: rgba(255,255,255,0.65);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .impact-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px 20px;
+    }
+
+    .impact-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .impact-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ====== CTA ====== */
+    .cta-section {
+      background: var(--green-pale);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 48px);
+      color: var(--green-deep);
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--text-mid);
+      font-size: 16px;
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--green-deep);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 30px 48px;
+      font-size: 13px;
+    }
+
+    footer span { color: rgba(255,255,255,0.8); }
+
+    /* ====== ANIMATE ON SCROLL ====== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; }
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+      .hero-text p { margin: 0 auto 36px; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { display: none; }
+      section.section-block { padding: 60px 24px; }
+      .reward-container, .impact-inner { grid-template-columns: 1fr; gap: 32px; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .modal-box { padding: 28px 20px; }
+      .modal-pillars { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-<nav>
-  <div class="logo">
-    <img src="images/logo.jpg">
-    <h2>Relova</h2>
-  </div>
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="logo"><img src="C:\Users\Advan\OneDrive\Documents\Desktop\VCS\RELOVA\images\logo.jpg" alt="Relova"><span class="logo-text">Relova</span></div>
 
   <ul>
     <li><a href="marketplace.html">Marketplace</a></li>
     <li><a href="tryon.html">Try-On</a></li>
     <li><a href="kamipeduli.html">Kami Peduli</a></li>
     <li><a href="circulardrop.html">Circular Drop</a></li>
-    <li><a href="reward.html">Reward</a></li>
-    <li><a href="premium.html">Premium</a></li>
+    <li><a href="reward.html">Relove Points</a></li>
+    <li><a href="premium.html" class="nav-cta">Premium</a></li>
   </ul>
-
-  <button onclick="location.href='premium.html'">Mulai Gratis</button>
 </nav>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
+<!-- ===== MODAL PELAJARI ===== -->
+<div class="modal-overlay" id="modalPelajari">
+  <div class="modal-box">
+    <button class="modal-close" onclick="tutupModal()">✕</button>
+    <h2>Tentang Relova</h2>
+    <p class="modal-sub">Platform circular fashion pertama yang mengintegrasikan jual-beli, donasi, dan daur ulang dalam satu ekosistem digital</p>
+
+    <div class="modal-steps">
+      <div class="modal-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Jual & Beli Pakaian Preloved</h4>
+          <p>Daftarkan pakaianmu di Marketplace Relova dan temukan ribuan item fashion berkualitas dengan harga terjangkau. Setiap transaksi otomatis menghasilkan Relove Points.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Donasi dengan Mudah</h4>
+          <p>Punya pakaian layak pakai tapi sudah tidak digunakan? Donasikan lewat fitur Kami Peduli. Mitra ekspedisi kami akan menjemput langsung dari rumahmu — gratis!</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Daur Ulang via Circular Drop</h4>
+          <p>Pakaian yang sudah tidak layak pakai bukan berarti harus dibuang. Serahkan ke Relova dan kami akan menyalurkan ke mitra daur ulang tekstil terverifikasi.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Kumpulkan Relove points & Tukar Diskon</h4>
+          <p>Setiap aksi positif seperti donasi, circular drop, dan transaksi akan menghasilkan Relove Points yang dapat ditukarkan dengan diskon pembelian di Marketplace Relova.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-pillars">
+      <div class="pillar-card">
+        <div class="pillar-icon">♻️</div>
+        <h4>Circular Drop</h4>
+        <p>Setiap pakaian punya siklus hidup yang bisa diperpanjang</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🤝</div>
+        <h4>Kami Peduli</h4>
+        <p>Donasi yang terukur langsung ke lembaga sosial mitra</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🤖</div>
+        <h4>Wardorbe Try-On</h4>
+        <p>Coba pakaian secara virtual sebelum membeli</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🏆</div>
+        <h4>Relove Points</h4>
+        <p>Aksi lingkungan kamu menghasilkan nilai nyata</p>
+      </div>
+    </div>
+
+    <div class="modal-cta">
+      <button class="btn-primary" onclick="location.href='marketplace.html'; tutupModal()">Mulai Sekarang</button>
+      <button class="btn-secondary" onclick="tutupModal()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Tutup
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="beranda">
   <div class="hero-text">
-    <h1>Fashion <span>Berkelanjutan</span><br>Dimulai dari Lemarimu</h1>
-    <p>
-      Jual, donasi, daur ulang, dan coba pakaian secara virtual dalam satu platform inovatif.
-    </p>
+    <div class="hero-eyebrow">
+      <span></span>
+      Platform Circular Fashion #1 di Solo
+    </div>
+
+    <h1>Fashion <span class="highlight">Berkelanjutan</span><br>Dimulai dari<br>Lemarimu</h1>
+
+    <p>Jual, donasi, dan daur ulang pakaianmu dalam satu platform. Bersama Relova, setiap helai kain punya makna lebih dari sekadar mode.</p>
 
     <div class="hero-buttons">
-      <button class="primary" onclick="location.href='marketplace.html'">Mulai Sekarang</button>
-      <button class="secondary">Pelajari</button>
+      <button class="btn-primary" onclick="location.href='marketplace.html'">Mulai Sekarang</button>
+      <button class="btn-secondary" onclick="bukaModal()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 5v2.5L8.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Pelajari Relova
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">12.480+</div>
+        <div class="stat-label">Pakaian beredar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">48 Ton</div>
+        <div class="stat-label">Limbah dikurangi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3.250+</div>
+        <div class="stat-label">Donasi tersalur</div>
+      </div>
     </div>
   </div>
 
-  <div class="hero-img">
-    <img src="https://admincerdas.s3.ap-southeast-1.amazonaws.com/20220708/29.1.PNG">
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="visual-card visual-card-back2"></div>
+      <div class="visual-card visual-card-back1"></div>
+      <div class="visual-card visual-card-main">
+        <div class="card-icon">👔</div>
+        <h3>Relova</h3>
+        <p>Circular Fashion Platform</p>
+      </div>
+      <div class="floating-badge badge-top">♻️ 48 Ton saved</div>
+      <div class="floating-badge badge-bottom">🎁 +30 EcoPoints</div>
+    </div>
   </div>
 </section>
 
-<!-- ================= FITUR ================= -->
-<section class="section">
-  <h2>Satu Platform, Banyak Solusi</h2>
+<!-- ===== FITUR ===== -->
+<section class="section-block features-section" id="fitur">
+  <div class="features-header fade-up">
+    <div class="section-label">Platform Kami</div>
+    <h2 class="section-title">Satu Platform, Banyak Solusi</h2>
+    <p class="section-sub">Relova mengintegrasikan seluruh siklus hidup pakaian dalam ekosistem digital yang mudah dan menyenangkan</p>
+  </div>
 
-  <div class="grid">
-
-    <div class="card" onclick="location.href='marketplace.html'">
-      <img src="https://admincerdas.s3.ap-southeast-1.amazonaws.com/20220708/29.1.PNG">
-      <div class="card-content">
-        <h3>Marketplace</h3>
-        <p>Jual & beli pakaian bekas berkualitas</p>
+  <div class="features-grid">
+    <div class="feature-card fade-up" onclick="location.href='marketplace.html'" style="transition-delay:0.05s">
+      <div class="feature-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQagY3JN492N23QrO1GrTVHPXeHhmVaMEAGmg&s" alt="Marketplace" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2d6a4f,#40916c)'">
+        <div class="feature-img-overlay"></div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-icon">🛍️</div>
+        <h3>Resale Marketplace</h3>
+        <p>Jual & beli pakaian preloved berkualitas dengan sistem verifikasi kondisi dan ulasan pengguna terverifikasi.</p>
+        <div class="feature-arrow">Lihat Marketplace →</div>
       </div>
     </div>
 
-    <div class="card" onclick="location.href='kamipeduli.html'">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR73dRcLAkYIzG29xrJE8xsd5wcAiIh_gjGaw&s">
-      <div class="card-content">
+    <div class="feature-card fade-up" onclick="location.href='kamipeduli.html'" style="transition-delay:0.1s">
+      <div class="feature-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR73dRcLAkYIzG29xrJE8xsd5wcAiIh_gjGaw&s" alt="Kami Peduli" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e8c547,#f4a261)'">
+        <div class="feature-img-overlay"></div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-icon">❤️</div>
         <h3>Kami Peduli</h3>
-        <p>Donasikan pakaian untuk yang membutuhkan</p>
+        <p>Donasikan pakaian layak pakaimu ke panti asuhan dan lembaga sosial. Mitra kurir kami jemput langsung dari rumahmu.</p>
+        <div class="feature-arrow">Mulai Donasi →</div>
       </div>
     </div>
 
-    <div class="card" onclick="location.href='circulardrop.html'">
-      <img src="https://imgx.parapuan.co/crop/30x16:1181x776/x/photo/2021/03/21/daur-ulang-pakaianjpg-20210321095550.jpg">
-      <div class="card-content">
+    <div class="feature-card fade-up" onclick="location.href='circulardrop.html'" style="transition-delay:0.15s">
+      <div class="feature-img-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7UZzRo2dB9e6gXrH2EX9C-iRZ5fzSL8Png&s" alt="Circular Drop" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a3c2e,#2d6a4f)'">
+        <div class="feature-img-overlay"></div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-icon">♻️</div>
         <h3>Circular Drop</h3>
-        <p>Daur ulang pakaian jadi produk baru</p>
+        <p>Pakaian rusak atau tidak layak pakai? Serahkan ke Relova untuk didaur ulang bersama mitra tekstil terverifikasi.</p>
+        <div class="feature-arrow">Daur Ulang →</div>
       </div>
     </div>
 
-    <div class="card" onclick="location.href='tryon.html'">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNT6lRFX8HAPgRHJDgZDJ0hO6SYCgkfOg-OQ&s">
-      <div class="card-content">
+    <div class="feature-card fade-up" onclick="location.href='tryon.html'" style="transition-delay:0.2s">
+      <div class="feature-img-wrap">
+        <img src="C:\Users\Advan\OneDrive\Pictures\Screenshots 1\Screenshot 2026-04-24 155606.png" alt="Virtual Try-On" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#40916c,#d8f3dc)'">
+        <div class="feature-img-overlay"></div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-icon">🤖</div>
         <h3>Virtual Try-On</h3>
-        <p>Coba pakaian langsung di tubuhmu</p>
+        <p>Coba pakaian secara virtual menggunakan AI sebelum membeli. Eksklusif untuk pengguna Relova Premium.</p>
+        <div class="feature-arrow">Coba Sekarang →</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ================= REWARD SYSTEM ================= -->
-<section class="section">
-  <h2>Reward System 🎁</h2>
+<!-- ===== REWARD ===== -->
+<section class="section-block reward-section" id="reward">
+  <div class="reward-container">
+    <div class="fade-up">
+      <div class="section-label">Relove Points System</div>
+      <h2 class="section-title">Aksi Baikmu Menghasilkan Nilai Nyata</h2>
+      <p class="section-sub">Setiap donasi, daur ulang, dan transaksi di Relova menghasilkan Relove Points yang bisa ditukar dengan diskon belanja.</p>
 
-  <div class="reward-box">
-    <h3>Poin Kamu</h3>
-    <h1 id="points">0</h1>
-    <p>Level: <span id="level">Bronze</span></p>
+      <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--text-mid);">
+          <span style="width:28px;height:28px;background:var(--green-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;">❤️</span>
+          Donasi 1 pakaian = +10 poin
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--text-mid);">
+          <span style="width:28px;height:28px;background:var(--green-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;">♻️</span>
+          Circular Drop = +15 poin
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--text-mid);">
+          <span style="width:28px;height:28px;background:var(--green-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;">🛍️</span>
+          Transaksi berhasil = +20 poin
+        </div>
+      </div>
 
-    <div class="progress">
-      <div class="progress-bar" id="progress"></div>
+      <button class="btn-primary" style="margin-top:28px" onclick="location.href='reward.html'">Cek Poinku</button>
     </div>
 
-    <p>Kumpulkan poin dari donasi & transaksi untuk dapat diskon!</p>
+    <div class="reward-card fade-up">
+      <div class="label">Relove Points Kamu</div>
+      <div class="reward-points" id="rewardPoints">0</div>
+      <div class="reward-level" id="rewardLevel">🥉 Bronze Member</div>
+
+      <div class="reward-progress-track">
+        <div class="reward-progress-fill" id="rewardProgressFill" style="width: 30%"></div>
+      </div>
+      <div class="reward-next" id="rewardNext">50 poin lagi menuju Silver 🥈</div>
+
+      <div class="reward-actions">
+        <div class="reward-action-item">
+          <strong>❤️ Donasi</strong>
+          +10 poin/item
+        </div>
+        <div class="reward-action-item">
+          <strong>♻️ Recycle</strong>
+          +15 poin/item
+        </div>
+        <div class="reward-action-item">
+          <strong>🛍️ Beli</strong>
+          +20 poin/trx
+        </div>
+        <div class="reward-action-item">
+          <strong>🎁 Tukar</strong>
+          Diskon belanja
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ================= IMPACT ================= -->
-<section class="impact">
-  <h2>Dampak Nyata Relova 🌱</h2>
+<!-- ===== IMPACT ===== -->
+<section class="section-block impact-section" id="dampak">
+  <div class="impact-inner">
+    <div class="impact-left fade-up">
+      <div class="section-label" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">Dampak Nyata</div>
+      <h2>Bersama Kita Kurangi<br>Krisis Limbah Fashion</h2>
+      <p>Indonesia menghasilkan 2,3 juta ton limbah tekstil per tahun. Relova hadir untuk membalik tren ini dengan menghubungkan pengguna, mitra sosial, dan pengelola daur ulang dalam satu ekosistem.</p>
 
-  <div class="impact-grid">
-
-    <div class="impact-box">
-      <h3>12.480+</h3>
-      <p>Pakaian digunakan kembali</p>
+      <button class="btn-secondary" style="margin-top:28px;border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8)" onclick="location.href='circulardrop.html'">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Mulai Berkontribusi
+      </button>
     </div>
 
-    <div class="impact-box">
-      <h3>48 Ton</h3>
-      <p>Limbah tekstil berkurang</p>
+    <div class="impact-grid fade-up">
+      <div class="impact-item">
+        <div class="impact-number">12.480+</div>
+        <div class="impact-label">Pakaian digunakan kembali</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-number">48 Ton</div>
+        <div class="impact-label">Limbah tekstil berkurang</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-number">3.250+</div>
+        <div class="impact-label">Pakaian didonasikan</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-number">30+</div>
+        <div class="impact-label">Mitra sosial aktif</div>
+      </div>
     </div>
-
-    <div class="impact-box">
-      <h3>3.250+</h3>
-      <p>Pakaian didonasikan</p>
-    </div>
-
-    <div class="impact-box">
-      <h3>30+</h3>
-      <p>Mitra sosial</p>
-    </div>
-
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section class="cta">
-  <h2>Mulai Perubahan Hari Ini 🚀</h2>
-  <p>Gabung dengan gerakan circular fashion bersama Relova</p>
-
-  <button onclick="location.href='premium.html'">
-    Coba Premium
-  </button>
+<!-- ===== CTA ===== -->
+<section class="section-block cta-section">
+  <div class="cta-inner fade-up">
+    <div class="section-label">Bergabung Sekarang</div>
+    <h2>Mulai Perubahan<br>Hari Ini</h2>
+    <p>Gabung bersama ribuan mahasiswa Solo yang sudah memilih gaya hidup lebih berkelanjutan bersama Relova.</p>
+    <div class="cta-buttons">
+      <button class="btn-primary" onclick="location.href='marketplace.html'">Jelajahi Marketplace</button>
+      <button class="btn-secondary" onclick="location.href='premium.html'">Coba Premium Gratis</button>
+    </div>
+  </div>
 </section>
 
-<!-- ================= SCRIPT ================= -->
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 <span>Relova</span> — Circular Fashion Platform · Solo, Indonesia</p>
+  <p style="margin-top:6px">Setiap pakaian punya cerita. Beri mereka babak selanjutnya.</p>
+</footer>
+
+<!-- ===== SCRIPT ===== -->
 <script>
+  /* NAVBAR SCROLL */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
 
-/* REWARD SYSTEM */
-let points = localStorage.getItem("points") || 50;
-points = parseInt(points);
+  /* MODAL PELAJARI */
+  function bukaModal() {
+    document.getElementById('modalPelajari').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-document.getElementById("points").innerText = points;
+  function tutupModal() {
+    document.getElementById('modalPelajari').classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
-let level = "Bronze";
-let progress = 30;
+  document.getElementById('modalPelajari').addEventListener('click', function(e) {
+    if (e.target === this) tutupModal();
+  });
 
-if(points >= 200){
-  level = "Gold";
-  progress = 100;
-}else if(points >= 100){
-  level = "Silver";
-  progress = 60;
-}
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') tutupModal();
+  });
 
-document.getElementById("level").innerText = level;
-document.getElementById("progress").style.width = progress + "%";
+  /* REWARD SYSTEM */
+  let points = parseInt(localStorage.getItem('points') || '50');
+  let level = 'Bronze', levelText = '🥉 Bronze Member', progress = 30, nextText = '50 poin lagi menuju Silver 🥈';
 
+  if (points >= 200) {
+    level = 'Gold'; levelText = '🥇 Gold Member'; progress = 100; nextText = 'Kamu sudah Gold! 🎉';
+  } else if (points >= 100) {
+    level = 'Silver'; levelText = '🥈 Silver Member'; progress = 60; nextText = (200 - points) + ' poin lagi menuju Gold 🥇';
+  } else {
+    nextText = (100 - points) + ' poin lagi menuju Silver 🥈';
+    progress = Math.round((points / 100) * 60);
+  }
+
+  document.getElementById('rewardPoints').innerText = points;
+  document.getElementById('rewardLevel').innerText = levelText;
+  document.getElementById('rewardProgressFill').style.width = progress + '%';
+  document.getElementById('rewardNext').innerText = nextText;
+
+  /* FADE ON SCROLL */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 </body>
