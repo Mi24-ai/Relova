@@ -3,212 +3,318 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relova Virtual Try-On</title>
-
-<link rel="stylesheet" href="style.css">
-
+<title>Virtual Try-On — Relova</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{--gd:#1a3c2e;--gm:#2d6a4f;--gl:#40916c;--gp:#d8f3dc;--gg:#f0faf3;--cr:#faf8f3;--ww:#f7f5ef;--td:#1a1a1a;--tm:#4a4a4a;--tl:#8a8a8a;--ac:#e8c547;--aw:#f4a261;--bd:rgba(45,106,79,.12);--sm:0 2px 12px rgba(0,0,0,.06);--md:0 8px 30px rgba(0,0,0,.10);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--td);overflow-x:hidden;}
 
-/* LAYOUT */
-.tryon-wrapper {
-  padding: 50px;
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(250,248,243,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);}
+.logo{display:flex;align-items:center;gap:10px;}.logo img{width:36px;height:36px;border-radius:10px;object-fit:cover;}.logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gd);}
+nav ul{display:flex;list-style:none;gap:4px;}nav ul li a{text-decoration:none;color:var(--tm);font-size:14px;font-weight:500;padding:8px 13px;border-radius:8px;transition:all .2s;}
+nav ul li a:hover,nav ul li a.active{color:var(--gm);background:var(--gp);}.nav-cta{background:var(--gm)!important;color:white!important;border-radius:10px!important;font-weight:600!important;}
 
-/* HEADER */
-.tryon-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
+/* HERO */
+.page-hero{padding:120px 48px 60px;text-align:center;background:linear-gradient(180deg,var(--gp) 0%,var(--cr) 100%);}
+.h-chip{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--gm);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:16px;box-shadow:0 2px 12px rgba(45,106,79,.15);}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,50px);font-weight:900;color:var(--gd);line-height:1.1;margin-bottom:14px;}
+.page-hero h1 em{color:var(--gl);font-style:normal;}
+.page-hero p{color:var(--tm);font-size:15px;max-width:560px;margin:0 auto 28px;line-height:1.75;}
 
-.tryon-header h1 {
-  font-size: 36px;
-}
+/* PREMIUM GATE */
+.prem-gate{background:linear-gradient(135deg,var(--gd),var(--gm));border-radius:20px;padding:28px 32px;color:white;display:flex;align-items:center;gap:24px;max-width:700px;margin:0 auto 40px;}
+.pg-icon{font-size:42px;flex-shrink:0;}
+.pg-text h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px;}
+.pg-text p{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:14px;}
+.btn-upgrade{background:var(--ac);color:var(--gd);border:none;padding:12px 24px;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;}
 
-.tryon-header span {
-  color: #2d6a4f;
-}
+/* FITUR DESCRIPTION */
+.feature-desc{padding:60px 48px;background:white;}
+.fd-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.fd-text .sec-label{display:inline-block;background:var(--gp);color:var(--gm);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px;}
+.fd-text h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--gd);line-height:1.2;margin-bottom:16px;}
+.fd-text p{font-size:15px;color:var(--tm);line-height:1.8;margin-bottom:14px;}
+.fd-text p:last-of-type{margin-bottom:24px;}
+.highlight-box{background:var(--gp);border-radius:14px;padding:16px 20px;border-left:4px solid var(--gm);}
+.highlight-box p{font-size:13.5px;color:var(--gd);font-weight:500;margin-bottom:0;line-height:1.6;}
 
-/* MAIN GRID */
-.tryon-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
-}
+/* VISUAL DEMO */
+.fd-visual{position:relative;}
+.demo-phone{width:260px;margin:0 auto;position:relative;}
+.phone-frame{background:var(--gd);border-radius:36px;padding:12px;box-shadow:0 20px 60px rgba(26,60,46,.4);}
+.phone-screen{background:white;border-radius:26px;overflow:hidden;aspect-ratio:9/18;}
+.phone-header{background:var(--gp);padding:14px 16px;display:flex;align-items:center;gap:8px;}
+.phone-header .ph-dot{width:8px;height:8px;border-radius:50%;background:var(--gm);}
+.phone-header .ph-title{font-size:12px;font-weight:600;color:var(--gd);}
+.phone-model{width:100%;height:220px;object-fit:cover;object-position:top;}
+.phone-wardrobe{padding:12px;}
+.pw-title{font-size:12px;font-weight:600;color:var(--gd);margin-bottom:8px;}
+.pw-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.pw-item{border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;}
+.pw-item img{width:100%;height:55px;object-fit:cover;}
+.pw-item.selected{border-color:var(--gm);}
+.ai-badge{position:absolute;top:-10px;right:-10px;background:var(--ac);color:var(--gd);font-size:11px;font-weight:700;padding:6px 12px;border-radius:20px;box-shadow:0 4px 16px rgba(232,197,71,.4);}
 
-/* CARD */
-.box {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
+/* CSS-ONLY TRYON DEMO */
+.demo-section{padding:60px 48px;background:var(--ww);}
+.demo-inner{max-width:980px;margin:0 auto;}
+.sec-header-c{text-align:center;margin-bottom:40px;}
+.sec-label-c{display:inline-block;background:var(--gp);color:var(--gm);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:12px;}
+.sec-title-c{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--gd);}
 
-/* MODEL */
-.model-box {
-  position: relative;
-  width: 100%;
-  height: 420px;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #eee;
-}
+/* CSS-ONLY INTERACTIVE: checkbox trick */
+input.pick-radio{display:none;}
+.demo-layout{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start;}
+.wardrobe-panel{background:white;border-radius:20px;border:1.5px solid var(--bd);padding:22px;}
+.wardrobe-panel h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gd);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bd);}
+.ward-item-row{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;cursor:pointer;border:1.5px solid var(--bd);margin-bottom:9px;transition:all .2s;background:white;}
+.ward-item-row:hover{border-color:var(--gl);background:var(--gg);}
+input.pick-radio:checked + .ward-item-row{border-color:var(--gm);background:var(--gp);}
+.ward-img{width:56px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.ward-info h4{font-size:13.5px;font-weight:600;color:var(--td);}
+.ward-info p{font-size:12px;color:var(--tl);margin-top:2px;}
+.ward-price{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gm);margin-top:4px;}
+.sel-indicator{margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:white;background:transparent;}
+input.pick-radio:checked + .ward-item-row .sel-indicator{background:var(--gm);border-color:var(--gm);}
+input.pick-radio:checked + .ward-item-row .sel-indicator::after{content:'✓';}
 
-.model-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+/* PREVIEW PANEL */
+.preview-panel{background:white;border-radius:20px;border:1.5px solid var(--bd);padding:22px;position:sticky;top:90px;}
+.preview-panel h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gd);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bd);}
+.preview-model{position:relative;width:100%;height:340px;background:var(--ww);border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pm-base{width:100%;height:100%;object-fit:cover;object-position:top;}
+.pm-overlay{position:absolute;top:60px;left:50%;transform:translateX(-50%);width:160px;opacity:0;transition:opacity .3s;}
+/* Show overlay ketika radio checked */
+#r1:checked ~ .demo-layout .preview-panel .ov1{opacity:.92;}
+#r2:checked ~ .demo-layout .preview-panel .ov2{opacity:.92;}
+#r3:checked ~ .demo-layout .preview-panel .ov3{opacity:.92;}
+#r4:checked ~ .demo-layout .preview-panel .ov4{opacity:.92;}
 
-/* CLOTHES */
-.clothes {
-  position: absolute;
-  top: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 220px;
-  opacity: 0.95;
-  transition: 0.3s;
-}
+.preview-empty{text-align:center;color:var(--tl);font-size:13.5px;}
+.preview-empty .pe-icon{font-size:40px;margin-bottom:10px;}
 
-/* WARDROBE */
-.wardrobe {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 15px;
-}
+/* Info selected item */
+.selected-info{display:none;margin-top:14px;padding:13px;background:var(--gp);border-radius:12px;}
+#r1:checked ~ .demo-layout .preview-panel .si-1{display:block;}
+#r2:checked ~ .demo-layout .preview-panel .si-2{display:block;}
+#r3:checked ~ .demo-layout .preview-panel .si-3{display:block;}
+#r4:checked ~ .demo-layout .preview-panel .si-4{display:block;}
+.selected-info h4{font-size:13.5px;font-weight:600;color:var(--gd);margin-bottom:3px;}
+.selected-info p{font-size:12.5px;color:var(--gm);}
 
-.wardrobe img {
-  width: 100%;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+.btn-beli-now{display:block;width:100%;padding:12px;background:var(--gm);color:white;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;text-align:center;text-decoration:none;margin-top:12px;transition:all .2s;}
+.btn-beli-now:hover{background:var(--gd);}
 
-.wardrobe img:hover {
-  transform: scale(1.1);
-}
+/* HOW IT WORKS */
+.how-sec{padding:70px 48px;background:var(--cr);}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:900px;margin:32px auto 0;}
+.how-card{background:white;border-radius:20px;border:1.5px solid var(--bd);padding:26px 20px;text-align:center;transition:all .3s;}
+.how-card:hover{transform:translateY(-4px);box-shadow:var(--sm);}
+.how-icon{font-size:32px;margin-bottom:12px;}
+.how-num{width:32px;height:32px;background:var(--gm);color:white;border-radius:9px;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.how-card h3{font-size:15px;font-weight:600;color:var(--gd);margin-bottom:6px;}
+.how-card p{font-size:13px;color:var(--tm);line-height:1.6;}
 
-/* BUTTON */
-.btn {
-  background: #2d6a4f;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
+/* CTA */
+.cta-sec{padding:70px 48px;background:var(--gd);text-align:center;}
+.cta-sec h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,40px);color:white;margin-bottom:14px;}
+.cta-sec p{color:rgba(255,255,255,.7);font-size:15px;max-width:440px;margin:0 auto 28px;line-height:1.65;}
+.btn-gold{background:var(--ac);color:var(--gd);border:none;padding:15px 32px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 6px 24px rgba(232,197,71,.4);transition:all .3s;}
+.btn-gold:hover{background:#f0cd40;transform:translateY(-2px);}
 
-/* SLIDER */
-.slider {
-  width: 100%;
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .tryon-main {
-    grid-template-columns: 1fr;
-  }
-}
-
+footer{background:var(--gd);color:rgba(255,255,255,.5);text-align:center;padding:26px;font-size:13px;border-top:1px solid rgba(255,255,255,.06);}
+footer span{color:rgba(255,255,255,.85);}
+@media(max-width:900px){nav{padding:12px 20px;}nav ul{display:none;}.page-hero,.feature-desc,.demo-section,.how-sec,.cta-sec{padding-left:22px;padding-right:22px;}.fd-inner,.demo-layout{grid-template-columns:1fr;}.demo-layout .preview-panel{position:static;}.prem-gate{flex-direction:column;text-align:center;}.how-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
 <nav>
-  <div class="logo">
-    <img src="images/logo.jpg">
-    <h2>Relova</h2>
-  </div>
-
+  <div class="logo"><img src="C:\Users\Advan\OneDrive\Documents\Desktop\VCS\RELOVA\images\logo.jpg" alt="Relova"><span class="logo-text">Relova</span></div>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="marketplace.html">Marketplace</a></li>
-    <li><a href="tryon.html">Try-On</a></li>
+    <li><a href="tryon.html" class="active">Try-On</a></li>
     <li><a href="kamipeduli.html">Kami Peduli</a></li>
     <li><a href="circulardrop.html">Circular Drop</a></li>
-    <li><a href="reward.html">Reward</a></li>
-    <li><a href="premium.html">Premium</a></li>
+    <li><a href="reward.html">Relove Points</a></li>
+    <li><a href="premium.html" class="nav-cta">Premium</a></li>
   </ul>
 </nav>
 
-<!-- HEADER -->
-<div class="tryon-wrapper">
+<!-- HERO -->
+<section class="page-hero">
+  <div class="h-chip">🤖 Teknologi AI Eksklusif Premium</div>
+  <h1>Virtual <em>Wardrobe</em><br>Try-On</h1>
+  <p>Coba pakaian preloved secara virtual dengan teknologi pemrosesan gambar berbasis AI. Upload fotomu, pilih pakaian, dan lihat tampilanmu sebelum membeli — layaknya fitting room digital yang bisa diakses kapan saja dan di mana saja.</p>
 
-  <div class="tryon-header">
-    <h1>Virtual <span>Try-On</span> Experience 👗</h1>
-    <p>Coba pakaian langsung di tubuhmu dengan teknologi digital fitting</p>
+  <div class="prem-gate">
+    <div class="pg-icon">🔒</div>
+    <div class="pg-text">
+      <h3>Fitur Eksklusif Relova Premium</h3>
+      <p>Virtual Wardrobe Try-On hanya tersedia untuk pengguna Relova Premium. Upgrade sekarang dan nikmati pengalaman belanja pakaian preloved yang benar-benar personal dan meyakinkan.</p>
+      <a href="premium.html" class="btn-upgrade">Upgrade ke Premium — Rp59.000/bln →</a>
+    </div>
   </div>
+</section>
 
-  <div class="tryon-main">
+<!-- FEATURE DESCRIPTION -->
+<section class="feature-desc">
+  <div class="fd-inner">
+    <div class="fd-text">
+      <div class="sec-label">Apa itu Virtual Try-On?</div>
+      <h2>Fitting Room Digital<br>dalam Genggamanmu</h2>
+      <p>Virtual Wardrobe Try-On memanfaatkan teknologi image processing berbasis AI yang dikembangkan khusus untuk ekosistem fashion preloved. Pengguna cukup mengunggah foto diri ke dalam platform, dan sistem Relova akan secara otomatis menghasilkan simulasi visual tampilan pengguna mengenakan pakaian yang dipilih.</p>
+      <p>Fitur ini secara langsung menjawab hambatan psikologis terbesar dalam pembelian pakaian secara daring, yakni <strong>ketidakpastian terhadap kesesuaian tampilan</strong>. Dengan Virtual Wardrobe Try-On, pengalaman berbelanja pakaian preloved menjadi jauh lebih personal, interaktif, dan meyakinkan.</p>
+      <div class="highlight-box">
+        <p>✨ Fitur ini tersedia secara eksklusif bagi pengguna <strong>Relova Premium</strong> melalui skema berlangganan bulanan Rp59.000/bln, mendorong konversi pengguna reguler menjadi pelanggan berbayar.</p>
+      </div>
+    </div>
+    <div class="fd-visual">
+      <div class="demo-phone">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-header">
+              <div class="ph-dot"></div>
+              <span class="ph-title">Virtual Try-On — Relova</span>
+            </div>
+            <img class="phone-model" src="C:\Users\Advan\OneDrive\Pictures\Screenshots 1\WhatsApp Image 2025-09-21 at 21.26.41_742f6fd0.jpg" alt="Model">
+            <div class="phone-wardrobe">
+              <div class="pw-title">Pilih Pakaian</div>
+              <div class="pw-grid">
+                <div class="pw-item selected"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=80&h=55&fit=crop" alt=""></div>
+                <div class="pw-item"><img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=80&h=55&fit=crop" alt=""></div>
+                <div class="pw-item"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=80&h=55&fit=crop" alt=""></div>
+                <div class="pw-item"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=80&h=55&fit=crop" alt=""></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-badge">🤖 AI Powered</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- UPLOAD -->
-    <div class="box">
-      <h3>Upload Foto</h3>
-      <input type="file" id="upload">
-      <button class="btn" onclick="resetClothes()">Reset Outfit</button>
+<!-- DEMO INTERAKTIF CSS-ONLY -->
+<section class="demo-section">
+  <div class="demo-inner">
+    <div class="sec-header-c">
+      <div class="sec-label-c">Demo Interaktif</div>
+      <h2 class="sec-title-c">Coba Pilih Pakaian</h2>
+      <p style="color:var(--tl);font-size:14px;margin-top:10px">Klik salah satu pakaian di bawah untuk melihat simulasi tampilan</p>
     </div>
 
-    <!-- MODEL -->
-    <div class="box">
-      <h3>Preview</h3>
+    <!-- CSS-ONLY INTERAKTIF: Radio inputs di luar layout untuk scope CSS sibling -->
+    <input type="radio" name="ward" class="pick-radio" id="r1">
+    <input type="radio" name="ward" class="pick-radio" id="r2">
+    <input type="radio" name="ward" class="pick-radio" id="r3">
+    <input type="radio" name="ward" class="pick-radio" id="r4">
 
-      <div class="model-box">
-        <img id="userImage" src="https://i.imgur.com/6VBx3io.png">
-        <img id="clothes" class="clothes" src="">
+    <div class="demo-layout">
+      <!-- WARDROBE PANEL -->
+      <div class="wardrobe-panel">
+        <h3>🛍️ Pilih Pakaian dari Marketplace</h3>
+
+        <label for="r1">
+          <div class="ward-item-row">
+            <img class="ward-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=120" alt="Floral Dress">
+            <div class="ward-info">
+              <h4>Floral Dress Premium</h4>
+              <p>Kondisi: Like New · Ukuran M</p>
+              <div class="ward-price">Rp 120.000</div>
+            </div>
+            <div class="sel-indicator"></div>
+          </div>
+        </label>
+
+        <label for="r2">
+          <div class="ward-item-row">
+            <img class="ward-img" src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=120" alt="Denim Jacket">
+            <div class="ward-info">
+              <h4>Denim Jacket Oversized</h4>
+              <p>Kondisi: Like New · Ukuran L</p>
+              <div class="ward-price">Rp 150.000</div>
+            </div>
+            <div class="sel-indicator"></div>
+          </div>
+        </label>
+
+        <label for="r3">
+          <div class="ward-item-row">
+            <img class="ward-img" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?w=120" alt="Vintage Dress">
+            <div class="ward-info">
+              <h4>Vintage Midi Dress</h4>
+              <p>Kondisi: Good · Ukuran S</p>
+              <div class="ward-price">Rp 90.000</div>
+            </div>
+            <div class="sel-indicator"></div>
+          </div>
+        </label>
+
+        <label for="r4">
+          <div class="ward-item-row">
+            <img class="ward-img" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=120" alt="Leather Jacket">
+            <div class="ward-info">
+              <h4>Leather Jacket Classic</h4>
+              <p>Kondisi: Good · Ukuran M</p>
+              <div class="ward-price">Rp 200.000</div>
+            </div>
+            <div class="sel-indicator"></div>
+          </div>
+        </label>
       </div>
 
-      <p>Geser untuk atur ukuran:</p>
-      <input type="range" min="100" max="300" value="220" class="slider" id="sizeSlider">
+      <!-- PREVIEW PANEL -->
+      <div class="preview-panel">
+        <h3>👗 Preview Outfit</h3>
+        <div class="preview-model">
+          <img class="pm-base" src="C:\Users\Advan\OneDrive\Pictures\Screenshots 1\WhatsApp Image 2025-09-21 at 21.26.41_742f6fd0.jpg" alt="Model">
+          <img class="pm-overlay ov1" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=180" alt="Dress overlay" style="top:55px;">
+          <img class="pm-overlay ov2" src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=180" alt="Jacket overlay" style="top:50px;">
+          <img class="pm-overlay ov3" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?w=180" alt="Dress overlay" style="top:55px;">
+          <img class="pm-overlay ov4" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=180" alt="Jacket overlay" style="top:50px;">
+        </div>
 
-    </div>
+        <div class="selected-info si-1"><h4>Floral Dress Premium</h4><p>Rp 120.000 · Ukuran M · Like New</p></div>
+        <div class="selected-info si-2"><h4>Denim Jacket Oversized</h4><p>Rp 150.000 · Ukuran L · Like New</p></div>
+        <div class="selected-info si-3"><h4>Vintage Midi Dress</h4><p>Rp 90.000 · Ukuran S · Good</p></div>
+        <div class="selected-info si-4"><h4>Leather Jacket Classic</h4><p>Rp 200.000 · Ukuran M · Good</p></div>
 
-    <!-- WARDROBE -->
-    <div class="box">
-      <h3>Wardrobe Kamu</h3>
+        <a href="marketplace.html" class="btn-beli-now">🛒 Beli di Marketplace →</a>
 
-      <div class="wardrobe">
-        <img src="https://dynamic.zacdn.com/Lk26EmB4rl01bNMuxZorrfrx4mQ=/0x440/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/marks-spencer-1941-8622415-1.jpg" onclick="changeClothes(this.src)">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJaqheabED9yWEzBwveu1DhYqJwh0RLTABkA&s" onclick="changeClothes(this.src)">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_sLK3WM195JuMOsmvaqquLRmDB1RHrYvBg&s" onclick="changeClothes(this.src)">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvWzknkCSAiyEVhJe9vGjcvTTP4gJA7Bdhg&s" onclick="changeClothes(this.src)">
+        <div style="margin-top:14px;background:rgba(232,197,71,.12);border-radius:10px;padding:11px 13px;font-size:12px;color:#7a6520;line-height:1.6;">
+          ⚡ Demo ini menggunakan simulasi statis. Fitur AI sesungguhnya yang menyesuaikan pakaian dengan foto tubuhmu tersedia setelah upgrade ke <strong>Relova Premium</strong>.
+        </div>
       </div>
-
     </div>
-
   </div>
+</section>
 
-</div>
+<!-- HOW IT WORKS -->
+<section class="how-sec">
+  <div style="text-align:center;margin-bottom:0">
+    <div style="display:inline-block;background:var(--gp);color:var(--gm);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:12px">Cara Kerja</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--gd)">Bagaimana Virtual Try-On Bekerja?</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-card"><div class="how-icon">📸</div><div class="how-num">1</div><h3>Upload Foto</h3><p>Unggah foto dirimu ke platform Relova. Foto terbaik adalah foto berdiri tegak menghadap kamera dengan latar belakang terang.</p></div>
+    <div class="how-card"><div class="how-icon">🛍️</div><div class="how-num">2</div><h3>Pilih Pakaian</h3><p>Jelajahi ribuan pakaian di Marketplace dan masukkan yang menarik ke keranjang atau langsung ke mode Try-On.</p></div>
+    <div class="how-card"><div class="how-icon">🤖</div><div class="how-num">3</div><h3>AI Memproses</h3><p>Sistem AI Relova menganalisis postur tubuh dan menghasilkan simulasi visual yang akurat menampilkan pakaian di tubuhmu.</p></div>
+    <div class="how-card"><div class="how-icon">✅</div><div class="how-num">4</div><h3>Beli dengan Yakin</h3><p>Lihat hasilnya dan beli dengan keyakinan penuh. Tidak ada lagi kekhawatiran soal ukuran atau kesesuaian tampilan.</p></div>
+  </div>
+</section>
 
-<script>
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>Siap Coba<br>Virtual Try-On?</h2>
+  <p>Upgrade ke Relova Premium dan nikmati fitting room digital AI yang bisa diakses kapan saja, di mana saja.</p>
+  <a href="premium.html" class="btn-gold">Upgrade ke Premium — Rp59.000/bln →</a>
+</section>
 
-/* UPLOAD FOTO */
-document.getElementById("upload").addEventListener("change", function(e){
-  const reader = new FileReader();
-  reader.onload = function(){
-    document.getElementById("userImage").src = reader.result;
-  }
-  reader.readAsDataURL(e.target.files[0]);
-});
-
-/* GANTI BAJU */
-function changeClothes(src){
-  document.getElementById("clothes").src = src;
-}
-
-/* RESET */
-function resetClothes(){
-  document.getElementById("clothes").src = "";
-}
-
-/* RESIZE BAJU */
-document.getElementById("sizeSlider").addEventListener("input", function(){
-  document.getElementById("clothes").style.width = this.value + "px";
-});
-
-</script>
+<footer><p>© 2026 <span>Relova</span> — Circular Fashion Platform · Solo, Indonesia</p></footer>
 
 </body>
 </html>
